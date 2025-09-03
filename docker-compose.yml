@@ -1,0 +1,36 @@
+services:
+  backend:
+    build: ./backend
+    image: sha256:3e89a08c328b53f22f723a6eae5fe93d227d387f19b1729033543a1fb619ecdd
+    ports:
+      - "5001:5001"
+    depends_on:
+      - db
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+
+  frontend:
+    build: ./frontend
+    image: sha256:0c8e2968d7cc2dbd82a6b722dacd8dbca6ebe7440e79f6548c834d78f296d813
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    environment:
+      BACKEND_URL: "http://backend:5001/api/data"
+
+  logger:
+    build: ./logger
+    image: sha256:627aee0791ce8b34418a8d34f4efc86de299a2603b444c72ac03f3bbb4d57fa9
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
