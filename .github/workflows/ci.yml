@@ -56,7 +56,7 @@ jobs:
           username: ${{ secrets.GMAIL_USERNAME }}
           password: ${{ secrets.GMAIL_PASSWORD }}
           subject: GitHub Actions Workflow Failed
-          to: v1n33719@gmail.com
+          to: soumyachauhan05@gmail.com
           from: ${{ secrets.GMAIL_USERNAME }}
           body: The CI/CD pipeline has failed. Please check the Actions tab.
           
